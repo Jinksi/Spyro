@@ -1,0 +1,24 @@
+
+// Variables
+// ––––––––––––––––––––––––––––––––––––––––––––––––––
+
+$font-family-system: -apple-system, BlinkMacSystemFont,
+  "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
+  "Fira Sans", "Droid Sans", "Helvetica Neue",
+  sans-serif;
+$font-family: $font-family-system;
+$font-family-secondary: $font-family-system;
+
+// Breakpoints
+$bp-larger-than-mobile    : "min-width: 400px" !default;
+$bp-larger-than-phablet   : "min-width: 550px" !default;
+$bp-larger-than-tablet    : "min-width: 750px" !default;
+$bp-larger-than-desktop   : "min-width: 1000px" !default;
+$bp-larger-than-desktophd : "min-width: 1200px" !default;
+
+//Grid Variables
+$container-width: 1200px !default;
+$container-width-skinny: 850px !default;
+
+// Misc
+$global-radius: 4px !default;

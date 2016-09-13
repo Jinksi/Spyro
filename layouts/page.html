@@ -1,0 +1,16 @@
+{{> header }}
+
+  <section class="section page-header">
+    <div class="container">
+      <h1>{{#if title}}{{title}} – {{/if}}{{ siteTitle }}</h1>
+      <p>{{ siteDescription }}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      {{{ contents }}}
+    </div>
+  </section>
+
+{{> footer }}

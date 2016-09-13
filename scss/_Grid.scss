@@ -1,0 +1,25 @@
+// Grid
+
+.container {
+  position: relative;
+  width: 100%;
+  max-width: $container-width;
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+  &.skinny{
+    max-width: $container-width-skinny;
+  }
+}
+
+// Clearing
+//––––––––––––––––––––––––––––––––––––––––––––––––––
+
+// Self Clearing Goodness
+
+.container:not(.flex):after,
+.clear {
+  content: "";
+  display: table;
+  clear: both;
+}

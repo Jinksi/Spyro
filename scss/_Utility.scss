@@ -1,0 +1,73 @@
+// Repeated Elements
+// ––––––––––––––––––––––––––––––––––––––––––––––––––
+
+.section{
+  padding: 3rem 0;
+  &.thin{
+    padding: 2rem 0;
+  }
+  &.thick{
+    padding: 10rem 0;
+  }
+}
+
+.dark{
+  background-color: $dark-grey;
+  color: white;
+}
+.light{
+  background-color: $light-grey;
+}
+.primary{
+  background-color: $color-primary;
+}
+.white{
+  background: white;
+}
+
+.color-white{
+  color: white;
+}
+.color-primary{
+  color: $color-primary;
+}
+
+.flex{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.background-image{
+  position: absolute 0;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: 0;
+}
+
+// Utility
+// ––––––––––––––––––––––––––––––––––––––––––––––––––
+
+// Float either direction
+.float-right {
+	float: right;
+}
+
+.float-left {
+	float: left;
+}
+
+.tacenter{
+	text-align: center;
+}
+.taright{
+	text-align: right;
+}
+.taleft{
+	text-align: left;
+}
+
+.relative{
+	position: relative;
+}
