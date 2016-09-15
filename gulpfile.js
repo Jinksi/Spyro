@@ -119,6 +119,9 @@ gulp.task('scripts', function() {
 gulp.task('clean', function() {
   del(['build/**', '!build', '!build/css/**', '!build/js/**'])
 })
+
 gulp.task('clean-hard', function() {
   del(['build/**'])
 })
+
+gulp.task('build', ['clean-hard', 'sass', 'scripts', 'metalsmith'])

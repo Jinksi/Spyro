@@ -14,7 +14,7 @@
   },
   "scripts": {
     "start": "gulp",
-    "build": "gulp metalsmith && gulp sass"
+    "build": "gulp build"
   },
   "devDependencies": {
     "browser-sync": "^2.15.0",
