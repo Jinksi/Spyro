@@ -1,12 +1,23 @@
 var gulp = require('gulp')
 var bs = require('browser-sync').create()
+var del = require('del')
+var fs = require('fs')
+
+// scss
 var sass = require('gulp-ruby-sass')
 var rucksack = require('gulp-rucksack')
 var autoprefixer = require('gulp-autoprefixer')
 var sourcemaps = require('gulp-sourcemaps')
-var del = require('del')
-var fs = require('fs')
 
+// js
+var browserify = require('browserify')
+var rename = require('gulp-rename')
+var uglify = require('gulp-uglify')
+var buffer = require('vinyl-buffer')
+var source = require('vinyl-source-stream')
+var gutil = require('gulp-util')
+
+//metalsmith
 var metalsmith = require('gulp-metalsmith')
 var markdown = require('metalsmith-markdown')
 var layouts = require('metalsmith-layouts')
@@ -49,8 +60,7 @@ gulp.task('metalsmith', ['clean'], function() {
     .pipe(gulp.dest('./build'))
 })
 
-// Static Server + watching scss/php files
-gulp.task('serve', ['metalsmith', 'sass'], function() {
+gulp.task('serve', ['metalsmith', 'sass', 'scripts'], function() {
 
   bs.init({
     open: false,
@@ -58,7 +68,8 @@ gulp.task('serve', ['metalsmith', 'sass'], function() {
   })
 
   gulp.watch(src.scss, ['sass'])
-  gulp.watch([src.src, src.js, src.layouts, src.components, src.ignore], ['metalsmith'])
+  gulp.watch(src.js, ['scripts'])
+  gulp.watch([src.src, src.layouts, src.components, src.ignore], ['metalsmith'])
   gulp.watch(['build/**', '!build/css/**']).on('change', bs.reload)
 })
 
@@ -86,8 +97,30 @@ gulp.task('sass', function() {
   }))
 })
 
+gulp.task('scripts', function() {
+  var b = browserify({
+    entries: './js/main.js',
+    debug: true,
+    sourceMaps: true
+  })
+  return b.bundle()
+    .on('error', function(err) {
+      bs.notify(err.message, 3000)
+      this.emit('end')
+    })
+    .pipe(source('./js/main.js'))
+    .pipe(rename('bundle.js'))
+    .pipe(buffer())
+    .pipe(sourcemaps.init({loadMaps: true}))
+    // Add transformation tasks to the pipeline here.
+    .pipe(uglify())
+    .on('error', gutil.log)
+    .pipe(sourcemaps.write('./'))
+    .pipe(gulp.dest('./build/js'))
+})
+
 gulp.task('clean', function() {
-  del(['build/**', '!build', '!build/css/**'])
+  del(['build/**', '!build', '!build/css/**', '!build/js/**'])
 })
 gulp.task('clean-hard', function() {
   del(['build/**'])
