@@ -14,9 +14,12 @@ h4,
 h5,
 h6 {
 	font-family: $font-family-secondary;
-	font-weight: 300;
+	font-weight: 100;
 	margin-bottom: 2.0rem;
 	margin-top: 0;
+	&:last-child{
+		margin-bottom: 0;
+	}
 }
 
 h1 {

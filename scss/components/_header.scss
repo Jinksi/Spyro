@@ -3,6 +3,11 @@
 // ––––––––––––––––––––––––––––––––––––––––––––––––––
 .header{
   padding: 15px 0;
+  color: white;
+  background: $color-primary;
+  a{
+    color: white;
+  }
 }
 .header-wrap{
   height: 100%;
