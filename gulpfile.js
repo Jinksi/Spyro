@@ -4,7 +4,7 @@ var del = require('del')
 var fs = require('fs')
 
 // scss
-var sass = require('gulp-ruby-sass')
+var sass = require('gulp-sass')
 var rucksack = require('gulp-rucksack')
 var autoprefixer = require('gulp-autoprefixer')
 var sourcemaps = require('gulp-sourcemaps')
@@ -74,27 +74,24 @@ gulp.task('serve', ['metalsmith', 'sass', 'scripts'], function() {
 })
 
 gulp.task('sass', function() {
-  return sass(src.scss, {
-    sourcemap: true,
-    style: 'compressed'
-  })
-  .on('error', function(err) {
-    bs.notify(err.message, 3000)
-    this.emit('end')
-  })
-  .on('error', sass.logError)
-  .pipe(autoprefixer({
-    browsers: ['> 1% in AU']
-  }))
-  .pipe(rucksack())
-  .pipe(sourcemaps.write('.', {
-      includeContent: false,
-      sourceRoot: 'source'
-  }))
-  .pipe(gulp.dest(src.css))
-  .pipe(bs.stream({
-    match: '**/*.css'
-  }))
+  return gulp.src(src.scss)
+    .pipe(sourcemaps.init())
+    .pipe(sass({
+        outputStyle: 'expanded'
+      })
+      .on('error', function(err) {
+        bs.notify(err.message, 3000)
+        this.emit('end')
+      }))
+    .pipe(autoprefixer({
+      browsers: ['> 1% in AU']
+    }))
+    .pipe(rucksack())
+    .pipe(sourcemaps.write('.'))
+    .pipe(gulp.dest(src.css))
+    .pipe(bs.stream({
+      match: '**/*.css'
+    }))
 })
 
 gulp.task('scripts', function() {
