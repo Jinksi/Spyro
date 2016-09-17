@@ -47,7 +47,9 @@ gulp.task('metalsmith', ['clean'], function() {
       },
       use: [
         markdown(),
-        permalinks(),
+        permalinks({
+          relative: false
+        }),
         layouts({
           engine: 'handlebars',
           default: 'page.html',
